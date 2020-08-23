@@ -1,6 +1,6 @@
 #container{
     width: 1000px;
-    height:400px;
+    height:500px;
     background-color: white;
     box-shadow: 15px 20px 15px #3e3d53;
     
@@ -46,4 +46,42 @@ html{
     cursor: pointer;
     border: none;
     margin: 8px 0;
+}
+#name{
+    margin-top: 50px;
+    width:25%;
+    height :30px;
+    border: none;
+    border-radius: 6px;
+    padding: 14px 20px;
+    font-size: 25px;
+    
+}
+#timer {
+    width:100px;
+    float:right;
+    text-align: center;
+}
+#minute{
+    font-size:50px;
+    color:red;
+}
+#seconds{
+    font-size:50px;
+    color:red;
+}
+#selector{
+    background-color:#3e3d53;
+    color: honeydew;
+	   cursor: pointer;
+	   font-size: 20px;
+	   padding: 14px 20px;
+	   margin: 8px 0;
+	   border: none;
+	   border-radius: 4px;
+
+}
+#connection{
+    font-size:50px;
+    color:red;
 }

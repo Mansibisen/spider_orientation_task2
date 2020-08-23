@@ -3,13 +3,27 @@ var count = {
     count1:0,
     count2 :{
         0:0,1:0,2:0,3:0,5:0,6:0,4:0,7:0,8:0,9:0
-    }
+    },
+    count3:0,
+    username : "username"
 }
 var container =document.getElementById("container")
 var innerContainer ={ inner : null}
 var score = {
     0:0,1:0,2:0,3:0,5:0,6:0,4:0,7:0,8:0,9:0
 }
+var selector = document.getElementById("selector")
+var namelabel = document.getElementById("namelabel")
+var namearea = document.getElementById("name")
+var connector = document.getElementById("connection")
+// get the name of user
+function  getname(value){
+    document.getElementById("name").value = value
+    var x = document.getElementById("name").value
+    count.username = x
+    
+}
+
 
 
 //question and answer set
@@ -71,11 +85,23 @@ var data = [
         correctans:"C"
     }
 ]
+//for randomizing the question sequence
+function shuffle(array){
+     
+    for (let i = array.length -1 ; i>0 ;i--){
+        const j = Math.floor(Math.random()*(i+1));
+        [array[i],array[j]] = [array[j],array[i]];
+    }
+    return array
+}
+shuffle(data)
 
+
+//printing first question on load
 function getfirstquestion(){
     
         
-        // code for next
+        
         innerContainer.inner =  document.createElement("div")
         var para = document.createElement("p")
         var node = document.createTextNode(data[0].question)
@@ -102,120 +128,99 @@ function getfirstquestion(){
             innerContainer.inner.appendChild(breakit)
             container.appendChild(innerContainer.inner)
         }
+        timerForEach()
 
 }
 getfirstquestion()
+// overall result of test
+function endtest(){
+    innerContainer.inner.remove();
+        innerContainer.inner =  document.createElement("div")
+        count.count3 = 1
+        var total = 0
+        for (var i = 0 ; i<10;i++){
+            total = total + score[i]
+}
+//localSaved (total)
+        var text = document.createTextNode("SCORE")
+        var header1 = document.createElement("h1")
+        var nameheader = document.createElement("h1")
+        var content = document.createTextNode("hey  "+count.username+"  this is your score")
+        
+        nameheader.appendChild(content)
+        header1.appendChild(text)
+        var header3 = document.createElement("h1")
+        var correctQuestion= document.createElement("h1")
+        var breakit = document.createElement("br")
+        var ratio = document.createElement("h1")
+        var timeSpent = document.createElement("h1")
+        header3.style.textAlign="center"
+        ratio.style.textAlign="center"
+        header1.style.textAlign = "center"
+        header1.style.color = "red"
+        nameheader.style.textAlign = "center"
+        correctQuestion.style.textAlign ="center"
+        timeSpent.style.textAlign = "center"
+        
+        var toalText = document.createTextNode(total)
+        var totalcorrect= document.createTextNode("No. of questions correct :"+total)
+        var correctRatio= document.createTextNode("Wrong to correct ratio :"+((10-total)/total).toFixed(2))
+        var caltime= 2.00 -(Number(minutes.innerHTML)+(Number(seconds.innerHTML)/100))
+        var n = caltime.toFixed(2)
+        
+        
+        var time = document.createTextNode("time spent:"+n)
+        header3.appendChild(toalText)
+        ratio.appendChild(correctRatio)
+        correctQuestion.appendChild(totalcorrect)
+        timeSpent.appendChild(time)
+        innerContainer.inner.appendChild(header1)
+        innerContainer.inner.appendChild(breakit)
+        innerContainer.inner.appendChild(nameheader)
+        innerContainer.inner.appendChild(breakit)
+        innerContainer.inner.appendChild(header3)
+        innerContainer.inner.appendChild(correctQuestion)
+        innerContainer.inner.appendChild(ratio)
+        innerContainer.inner.appendChild(timeSpent)
+
+        localSaved (total)
+        container.appendChild(innerContainer.inner)
+        minutes.remove()
+    seconds.remove()
+   previous.remove()
+    next.remove()
+   submit.remove()
+   selector.remove()
+   namelabel.remove()
+   namearea.remove()
+   connector.remove()
+}
+// to get next question
 function getnextquestion(){
     
     if (count.count1 < 9){
-        
-        innerContainer.inner.remove();
-            
-
-
-        
-        // code for next
-        innerContainer.inner =  document.createElement("div")
         count.count1++
-        var para = document.createElement("p")
-        var node = document.createTextNode(data[count.count1].question)
-        para.style.fontSize = "40px"
-        var lst = ["A","B","C","D"]
-        para.appendChild(node)
-        innerContainer.inner.appendChild(para)
-        for(i=0;i<4;i++){
-            var radioOption = data[count.count1].options[i]
-            var label = document.createElement("label")
-            var optiondata = document.createTextNode(radioOption)
-            label.appendChild(optiondata)
-            label.htmlFor = "options"+i
-            var breakit = document.createElement("br")
-            var radiobox = document.createElement("input")
-            radiobox.type = "radio"
-            radiobox.id="options"+i
-            radiobox.name= "questag"+count.count1
-            radiobox.value = lst[i]
-            label.style.fontSize="25px"
-            
-            innerContainer.inner.appendChild(radiobox)
-            innerContainer.inner.appendChild(label)
-            innerContainer.inner.appendChild(breakit)
-            container.appendChild(innerContainer.inner)
-        }
-
-        
-        
-        
-
+        question()
+        timerForEach()
     }else{
         //message for showing result
-        
-        innerContainer.inner.remove();
-        innerContainer.inner =  document.createElement("div")
-        var text = document.createTextNode("SCORE")
-        var header1 = document.createElement("h1")
-        header1.appendChild(text)
-        header1.style.textAlign = "center"
-        var header3 = document.createElement("h1")
-        var breakit = document.createElement("br")
-        var total = 0
-        for (var i = 0 ; i<10;i++){
-            
-            total = total + score[i]
-
-        }
-        var toalText = document.createTextNode(total)
-        header3.appendChild(toalText)
-        header3.style.textAlign="center"
-        innerContainer.inner.appendChild(header1)
-        innerContainer.inner.appendChild(breakit)
-        innerContainer.inner.appendChild(breakit)
-        innerContainer.inner.appendChild(header3)
-        container.appendChild(innerContainer.inner)
-
-
+        endtest()
     }
-
-
 }
+//to get previous question
 function getpreviousquestion(){
     //code for previous
     
     if (count.count1 > 0){
         count.count1 = count.count1 - 1
-        
-        innerContainer.inner.remove();
-        innerContainer.inner = document.createElement("div")
-        var para = document.createElement("p")
-        var node = document.createTextNode(data[count.count1].question)
-        para.style.fontSize = "40px"
-        var lst = ["A","B","C","D"]
-        para.appendChild(node)
-        innerContainer.inner.appendChild(para)
-        for(i=0;i<4;i++){
-            var radioOption = data[count.count1].options[i]
-            var label = document.createElement("label")
-            var optiondata = document.createTextNode(radioOption)
-            label.appendChild(optiondata)
-            label.htmlFor = "options"+i
-            var breakit = document.createElement("br")
-            var radiobox = document.createElement("input")
-            radiobox.type = "radio"
-            radiobox.id="options"+i
-            radiobox.name= "questag"+count.count1
-            label.style.fontSize="25px"
-            radiobox.value = lst[i]
-            innerContainer.inner.appendChild(radiobox)
-            innerContainer.inner.appendChild(label)
-            innerContainer.inner.appendChild(breakit)
-            container.appendChild(innerContainer.inner)
-
-        }
+        question()
+       timerForEach()
 }
     else{
-        //error message of previous not allowed
+        alert("already at first question");
     }
 }
+// submitting the individual answer
 function submitAnswer(){
     
     //check the answer 
@@ -225,24 +230,181 @@ function submitAnswer(){
     var yourans = document.querySelector('input[name =questag'+count.count1+']:checked').value;
     var yourid = document.querySelector('input[name =questag'+count.count1+']:checked').id
     var selectedInput = document.querySelector('label[for ='+yourid+']')
+    var tagged = document.getElementById(count.count1)
+    tagged.style.backgroundColor = "orange"
     if (rightans === yourans){
         //show green
-        selectedInput.style.backgroundColor = "green";
+        selectedInput.style.backgroundColor = "#98fb98";
         score[count.count1] = 1
-        
     }
     else {
         //red and green 
         score[count.count1] = 0
-        selectedInput.style.backgroundColor = "red"
-        
-        
+        selectedInput.style.backgroundColor = "#f0908f";
     }}
     else{
         
         alert("already submitted")
     }
 }
+
+//timer 
+var minutes = document.getElementById("minute");
+ var seconds = document.getElementById("seconds");
+ var totalSecond = 120;
+ timer=setInterval(setTime, 1000);
+
+ function setTime() {
+   totalSecond = totalSecond-1
+   seconds.innerHTML = checkin(totalSecond % 60);
+   minutes.innerHTML = checkin(parseInt(totalSecond / 60));
+ }
+
+ function checkin(val) {
+   var valString = val + "";
+   if (valString.length < 2) {
+     return "0" + valString;
+   } else {
+     return valString;
+  }
+ }
+ setTimeout(function () {
+    // after 2 seconds
+    if (count.count3 === 0){
+    endtest()}
+    
+ }, 120000)
+ 
+ //localstorage
+ function compareScore(a,b){
+    if(a.score> b.score){
+           return -1
+       }else{
+           return 1 
+       }
+   }
+
+ function localSaved (a){
+    if (typeof(Storage) !== "undefined") {
+        var array2 = localStorage.getItem("array2");
+        array2 = (array2) ? JSON.parse(array2) : [];
+        var bestscore  = document.createElement("h1")
+        var labelofbest = document.createElement("h1")
+        var bestcontent = document.createTextNode("Best score")
+        labelofbest.appendChild(bestcontent)
+        bestscore.style.textAlign = "center"
+        labelofbest.style.color = "red"
+        labelofbest.style.textAlign = "center"
+        
+        if (array2.length<=5){
+        var obtainedscore ={
+             name:count.username,
+             score:a
+         }
+        array2.push(obtainedscore);
+        array2.sort(compareScore)
+         localStorage.setItem("array2", JSON.stringify(array2));
+         var z = array2[0]
+          bestscore.innerHTML =  z.name + ":" + z.score;
+         
+        }else{
+          var obtainedscore ={
+            name:count.username,
+            score:a
+        }
+       array2.push(obtainedscore);
+       array2.sort(compareScore) 
+         array2.splice(4);
+          localStorage.setItem("array2", JSON.stringify(array2));
+          var z = array2[0]
+         bestscore.innerHTML =  z.name + ":" + z.score;
+         
+         }
+         innerContainer.inner.appendChild(labelofbest)
+         innerContainer.inner.appendChild(bestscore)
+      } else {
+        bestscore.innerHTML = "Sorry, your browser does not support Web Storage...";
+      } 
+ }
+// for respective question
+function  getrespectivequestion(){
+    var choosenquestion = document.getElementById("selector").value
+    count.count1 = Number(choosenquestion)
+    question()
+    timerForEach()
+
+}
+// timer for each question 
+function timerForEach() {
+    var timelabel = document.createElement("span")
+    var timecontent = document.createTextNode("Time spent on this question :--")
+    var minulabel = document.createElement("label")
+    var secondslabel= document.createElement("label")
+    var divider = document.createElement("label")
+    divider.appendChild(document.createTextNode(":"))
+    timelabel.appendChild(timecontent)
+    timelabel.style.fontSize = "40px";
+    minulabel.style.fontSize = "40px";
+    secondslabel.style.fontSize = "40px";
+    divider.style.fontSize = "40px";
+    minulabel.style.color = "red";
+    secondslabel.style.color = "red";
+    divider.style.color = "red";
+    var givenseconds = 0 
+    setInterval(timegiven,1000)
+    function timegiven () {
+        givenseconds++
+        secondslabel.innerHTML = checkin(givenseconds % 60);
+        minulabel.innerHTML = checkin(parseInt(givenseconds / 60));
+
+    } 
+    innerContainer.inner.appendChild(document.createElement("br"))
+    innerContainer.inner.appendChild(document.createElement("br"))
+    innerContainer.inner.appendChild(document.createElement("br"))
+    innerContainer.inner.appendChild(timelabel)
+    innerContainer.inner.appendChild(minulabel)
+    innerContainer.inner.appendChild(divider)
+    innerContainer.inner.appendChild(secondslabel)
+
+}
+
+
+// getting the question
+function question (){
+    innerContainer.inner.remove();
+        innerContainer.inner =  document.createElement("div")
+        //count.count1++
+        var para = document.createElement("p")
+        var node = document.createTextNode(data[count.count1].question)
+        para.style.fontSize = "40px"
+        var lst = ["A","B","C","D"]
+        para.appendChild(node)
+        innerContainer.inner.appendChild(para)
+        for(i=0;i<4;i++){
+            var radioOption = data[count.count1].options[i]
+            var label = document.createElement("label")
+            var optiondata = document.createTextNode(radioOption)
+            label.appendChild(optiondata)
+            label.htmlFor = "options"+i
+            var breakit = document.createElement("br")
+            var radiobox = document.createElement("input")
+            radiobox.type = "radio"
+            radiobox.id="options"+i
+            radiobox.name= "questag"+count.count1
+            radiobox.value = lst[i]
+            label.style.fontSize="25px"
+            innerContainer.inner.appendChild(radiobox)
+            innerContainer.inner.appendChild(label)
+            innerContainer.inner.appendChild(breakit)
+            container.appendChild(innerContainer.inner)
+}}
+
+
+
+
+
+
+
 
 //event listeners
 var previous = document.getElementById("btn")
