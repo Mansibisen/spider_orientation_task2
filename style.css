@@ -1,0 +1,49 @@
+#container{
+    width: 1000px;
+    height:400px;
+    background-color: white;
+    box-shadow: 15px 20px 15px #3e3d53;
+    
+    margin-top: 150px;
+    margin-left: 100px;
+}
+html{
+    background-image: url("white-geometric-texture-background.jpg");
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+#btn3{
+    width: 25%;
+    border-radius: 6px;
+    background-color:#7f7f7f;
+    color: black;
+    padding: 14px 20px;
+    font-size: 30px;
+    cursor: pointer;
+    border: none;
+    margin: 8px 0;
+    float:right;
+}
+#btn{
+    width: 25%;
+    border-radius: 6px;
+    background-color:#7f7f7f;
+    color: black;
+    padding: 14px 20px;
+    font-size: 30px;
+    cursor: pointer;
+    border: none;
+    margin: 8px 0;
+}
+#btn2{
+    width: 25%;
+    border-radius: 6px;
+    background-color:#7f7f7f;
+    color: black;
+    padding: 14px 20px;
+    font-size: 30px;
+    cursor: pointer;
+    border: none;
+    margin: 8px 0;
+}
