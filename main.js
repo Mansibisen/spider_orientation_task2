@@ -3,6 +3,10 @@ var count = {
     count1:0,
     count2 :{
         0:0,1:0,2:0,3:0,5:0,6:0,4:0,7:0,8:0,9:0
+    },
+    total :0,
+    color:{
+        0:null,1:null,2:null,3:0,5:0,6:0,4:0,7:0,8:0,9:0 
     }
 }
 var container =document.getElementById("container")
@@ -10,7 +14,10 @@ var innerContainer ={ inner : null}
 var score = {
     0:0,1:0,2:0,3:0,5:0,6:0,4:0,7:0,8:0,9:0
 }
-
+var previous = document.getElementById("btn")
+var next = document.getElementById("btn2")
+var submit = document.getElementById("btn3")
+var yourans2 = {0:null,1:null,2:null,3:null,5:null,6:null,4:null,7:null,8:null,9:null}
 
 //question and answer set
 var data = [
@@ -101,10 +108,39 @@ function getfirstquestion(){
             innerContainer.inner.appendChild(label)
             innerContainer.inner.appendChild(breakit)
             container.appendChild(innerContainer.inner)
+            
         }
 
 }
 getfirstquestion()
+function endtest(){
+    innerContainer.inner.remove();
+        innerContainer.inner =  document.createElement("div")
+        var text = document.createTextNode("SCORE")
+        var header1 = document.createElement("h1")
+        header1.appendChild(text)
+        header1.style.textAlign = "center"
+        var header3 = document.createElement("h1")
+        var breakit = document.createElement("br")
+        var total = 0
+        for (var i = 0 ; i<10;i++){
+            
+            total = total + score[i]
+
+        }
+        var toalText = document.createTextNode(total)
+        header3.appendChild(toalText)
+        header3.style.textAlign="center"
+        innerContainer.inner.appendChild(header1)
+        innerContainer.inner.appendChild(breakit)
+        innerContainer.inner.appendChild(breakit)
+        innerContainer.inner.appendChild(header3)
+        container.appendChild(innerContainer.inner)
+        previous.remove()
+        next.remove()
+        submit.remove()
+
+}
 function getnextquestion(){
     
     if (count.count1 < 9){
@@ -142,6 +178,15 @@ function getnextquestion(){
             innerContainer.inner.appendChild(breakit)
             container.appendChild(innerContainer.inner)
         }
+        if (count.count2[count.count1] === 1){
+            var showcolor =  document.querySelector('label[for ='+yourans2[count.count1].id+']')
+            if(score[count.count1] === 1){
+                showcolor.style.backgroundColor = "green";
+            }else{
+                showcolor.style.backgroundColor = "red";
+            }
+
+        }
 
         
         
@@ -150,28 +195,8 @@ function getnextquestion(){
     }else{
         //message for showing result
         
-        innerContainer.inner.remove();
-        innerContainer.inner =  document.createElement("div")
-        var text = document.createTextNode("SCORE")
-        var header1 = document.createElement("h1")
-        header1.appendChild(text)
-        header1.style.textAlign = "center"
-        var header3 = document.createElement("h1")
-        var breakit = document.createElement("br")
-        var total = 0
-        for (var i = 0 ; i<10;i++){
-            
-            total = total + score[i]
-
-        }
-        var toalText = document.createTextNode(total)
-        header3.appendChild(toalText)
-        header3.style.textAlign="center"
-        innerContainer.inner.appendChild(header1)
-        innerContainer.inner.appendChild(breakit)
-        innerContainer.inner.appendChild(breakit)
-        innerContainer.inner.appendChild(header3)
-        container.appendChild(innerContainer.inner)
+       
+        alert("already at last question ")
 
 
     }
@@ -211,11 +236,22 @@ function getpreviousquestion(){
             container.appendChild(innerContainer.inner)
 
         }
+        if (count.count2[count.count1] === 1){
+            var showcolor =  document.querySelector('label[for ='+yourans2[count.count1].id+']')
+            if(score[count.count1] === 1){
+                showcolor.style.backgroundColor = "green";
+            }else{
+                showcolor.style.backgroundColor = "red";
+            }
+
+        }
+
 }
     else{
-        //error message of previous not allowed
+        alert("already at first question")
     }
 }
+//var yourans2 = {0:null,1:null,2:null,3:null,5:null,6:null,4:null,7:null,8:null,9:null}
 function submitAnswer(){
     
     //check the answer 
@@ -223,6 +259,7 @@ function submitAnswer(){
     var rightans = data[count.count1].correctans
     count.count2[count.count1] = 1
     var yourans = document.querySelector('input[name =questag'+count.count1+']:checked').value;
+    yourans2[count.count1] = document.querySelector('input[name =questag'+count.count1+']:checked')
     var yourid = document.querySelector('input[name =questag'+count.count1+']:checked').id
     var selectedInput = document.querySelector('label[for ='+yourid+']')
     if (rightans === yourans){
@@ -237,7 +274,17 @@ function submitAnswer(){
         selectedInput.style.backgroundColor = "red"
         
         
-    }}
+    }
+     
+    
+            
+    count.total = count.total + 1
+
+    
+    if( count.total === 10){
+        endtest()
+    }
+}
     else{
         
         alert("already submitted")
@@ -245,9 +292,7 @@ function submitAnswer(){
 }
 
 //event listeners
-var previous = document.getElementById("btn")
-var next = document.getElementById("btn2")
-var submit = document.getElementById("btn3")
+
 previous.addEventListener("click",getpreviousquestion)
 next.addEventListener("click",getnextquestion)
 submit.addEventListener("click",submitAnswer)
