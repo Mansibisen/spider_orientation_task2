@@ -10,9 +10,8 @@
     <link rel = "stylesheet" type = "text/css" href= "style.css"/>
 </head>
 
-<body>
-    <label style="font-size :25px" id = "namelabel">Enter your name :</label>
-    <textarea type= "textarea" id = "name" value = "username" onkeyup="getname(this.value)"></textarea><br>
+<body onload=" givename()">
+   
     <div id = "timer"><label id = "minute">02</label><label id = "connection">:</label><label id = "seconds">00</label></div>
     <div id = "container"></div><br><br>
     <select onchange="getrespectivequestion()" id = "selector">

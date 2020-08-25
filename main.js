@@ -5,7 +5,8 @@ var count = {
         0:0,1:0,2:0,3:0,5:0,6:0,4:0,7:0,8:0,9:0
     },
     count3:0,
-    username : "username"
+    username : "username",
+    total : 0,
 }
 var container =document.getElementById("container")
 var innerContainer ={ inner : null}
@@ -13,15 +14,26 @@ var score = {
     0:0,1:0,2:0,3:0,5:0,6:0,4:0,7:0,8:0,9:0
 }
 var selector = document.getElementById("selector")
-var namelabel = document.getElementById("namelabel")
-var namearea = document.getElementById("name")
+
 var connector = document.getElementById("connection")
+var yourans2 = {
+    0:null,1:null,2:null,3:null,5:null,6:null,4:null,7:null,8:null,9:null
+}
 // get the name of user
-function  getname(value){
+/*function  getname(value){
     document.getElementById("name").value = value
     var x = document.getElementById("name").value
     count.username = x
     
+}*/
+function givename(){
+    var text = prompt("Enter your name to procedd")
+    console.log(text)
+    if (text === null || text ===""){
+        givename()
+    }else{
+    count.username = text}
+
 }
 
 
@@ -141,7 +153,7 @@ function endtest(){
         for (var i = 0 ; i<10;i++){
             total = total + score[i]
 }
-//localSaved (total)
+
         var text = document.createTextNode("SCORE")
         var header1 = document.createElement("h1")
         var nameheader = document.createElement("h1")
@@ -167,9 +179,14 @@ function endtest(){
         var correctRatio= document.createTextNode("Wrong to correct ratio :"+((10-total)/total).toFixed(2))
         var caltime= 2.00 -(Number(minutes.innerHTML)+(Number(seconds.innerHTML)/100))
         var n = caltime.toFixed(2)
-        
-        
-        var time = document.createTextNode("time spent:"+n)
+        var ts = 120 - ((Number(minutes.innerHTML))*60 + Number(seconds.innerHTML))
+        console.log(ts)
+        console.log(Number(minutes.innerHTML))
+        console.log(Number(seconds.innerHTML))
+        var m = checkin(parseInt(ts / 60));
+        var s = checkin(parseInt(ts % 60))
+       
+        var time = document.createTextNode("time spent:---"+m+":"+s)
         header3.appendChild(toalText)
         ratio.appendChild(correctRatio)
         correctQuestion.appendChild(totalcorrect)
@@ -191,8 +208,7 @@ function endtest(){
     next.remove()
    submit.remove()
    selector.remove()
-   namelabel.remove()
-   namearea.remove()
+   
    connector.remove()
 }
 // to get next question
@@ -202,9 +218,19 @@ function getnextquestion(){
         count.count1++
         question()
         timerForEach()
+        if (count.count2[count.count1] === 1){
+            var showcolor = document.querySelector('label[for ='+yourans2[count.count1].id+']')
+            if (score[count.count1] === 1){
+            showcolor.style.backgroundColor = "#98fb98";
+ 
+            }else{
+             showcolor.style.backgroundColor = "#f0908f";
+ 
+            }
+        }
     }else{
         //message for showing result
-        endtest()
+        alert("already at last question")
     }
 }
 //to get previous question
@@ -215,6 +241,16 @@ function getpreviousquestion(){
         count.count1 = count.count1 - 1
         question()
        timerForEach()
+       if (count.count2[count.count1] === 1){
+           var showcolor = document.querySelector('label[for ='+yourans2[count.count1].id+']')
+           if (score[count.count1] === 1){
+           showcolor.style.backgroundColor = "#98fb98";
+
+           }else{
+            showcolor.style.backgroundColor = "#f0908f";
+
+           }
+       }
 }
     else{
         alert("already at first question");
@@ -228,6 +264,7 @@ function submitAnswer(){
     var rightans = data[count.count1].correctans
     count.count2[count.count1] = 1
     var yourans = document.querySelector('input[name =questag'+count.count1+']:checked').value;
+    yourans2[count.count1] = document.querySelector('input[name =questag'+count.count1+']:checked')
     var yourid = document.querySelector('input[name =questag'+count.count1+']:checked').id
     var selectedInput = document.querySelector('label[for ='+yourid+']')
     var tagged = document.getElementById(count.count1)
@@ -241,7 +278,12 @@ function submitAnswer(){
         //red and green 
         score[count.count1] = 0
         selectedInput.style.backgroundColor = "#f0908f";
-    }}
+    }
+count.total = count.total +1
+if (count.total === 10){
+    endtest()
+}
+}
     else{
         
         alert("already submitted")
@@ -273,7 +315,7 @@ var minutes = document.getElementById("minute");
     if (count.count3 === 0){
     endtest()}
     
- }, 120000)
+ }, 123000)
  
  //localstorage
  function compareScore(a,b){
