@@ -10,22 +10,30 @@ var count = {
 }
 var container =document.getElementById("container")
 var innerContainer ={ inner : null}
-var score = {
-    0:0,1:0,2:0,3:0,5:0,6:0,4:0,7:0,8:0,9:0
+var score = {0:0,1:0,2:0,3:0,5:0,6:0,4:0,7:0,8:0,9:0
+    
+}
+var color = {
+    0:document.getElementById("value1"),
+    1:document.getElementById("value2"),
+    2:document.getElementById("value3"),
+    3:document.getElementById("value4"),
+    5:document.getElementById("value5"),
+    6:document.getElementById("value6"),
+    4:document.getElementById("value7"),
+    7:document.getElementById("value8"),
+    8:document.getElementById("value9"),
+    9:document.getElementById("value10")
+    
 }
 var selector = document.getElementById("selector")
-
+var navtag = document.getElementById("navtag")
 var connector = document.getElementById("connection")
 var yourans2 = {
     0:null,1:null,2:null,3:null,5:null,6:null,4:null,7:null,8:null,9:null
 }
 // get the name of user
-/*function  getname(value){
-    document.getElementById("name").value = value
-    var x = document.getElementById("name").value
-    count.username = x
-    
-}*/
+
 function givename(){
     var text = prompt("Enter your name to procedd")
     console.log(text)
@@ -208,7 +216,7 @@ function endtest(){
     next.remove()
    submit.remove()
    selector.remove()
-   
+   navtag.remove()
    connector.remove()
 }
 // to get next question
@@ -267,17 +275,20 @@ function submitAnswer(){
     yourans2[count.count1] = document.querySelector('input[name =questag'+count.count1+']:checked')
     var yourid = document.querySelector('input[name =questag'+count.count1+']:checked').id
     var selectedInput = document.querySelector('label[for ='+yourid+']')
-    var tagged = document.getElementById(count.count1)
-    tagged.style.backgroundColor = "orange"
+    
     if (rightans === yourans){
         //show green
         selectedInput.style.backgroundColor = "#98fb98";
         score[count.count1] = 1
+        color[count.count1].style.backgroundColor = "#98fb98"
     }
     else {
-        //red and green 
+        //red  
         score[count.count1] = 0
         selectedInput.style.backgroundColor = "#f0908f";
+        
+        color[count.count1].style.backgroundColor ="#f0908f";
+        
     }
 count.total = count.total +1
 if (count.total === 10){
@@ -369,8 +380,19 @@ var minutes = document.getElementById("minute");
       } 
  }
 // for respective question
-function  getrespectivequestion(){
-    var choosenquestion = document.getElementById("selector").value
+function opennav(){
+    document.getElementById("selector").style.width = "250px";
+}
+function closenav(){
+    document.getElementById("selector").style.width = "0";
+}
+
+function  getrespectivequestion(a){
+    var choosenquestion = document.getElementById(a).rel
+    
+    
+    //color[Number(choosenquestion)] = document.getElementById(a)
+    
     count.count1 = Number(choosenquestion)
     question()
     timerForEach()

@@ -11,10 +11,24 @@
 </head>
 
 <body onload=" givename()">
+    <div id = "selector" class = "sidenav">
+        <a class = "closebtn" onclick = "closenav()" href = "javascript:void(0)">&times;</a>
+        <a   rel = "0" onclick="getrespectivequestion('value1')" id = "value1">Ques.1</a>
+        <a   rel = "1" onclick="getrespectivequestion('value2')" id = "value2">Ques.2</a>
+        <a   rel = "2" onclick="getrespectivequestion('value3')" id = "value3">Ques.3</a>
+        <a   rel = "3" onclick="getrespectivequestion('value4')" id = "value4">Ques.4</a>
+        <a   rel = "4" onclick="getrespectivequestion('value5')" id = "value5">Ques.5</a>
+        <a   rel = "5" onclick="getrespectivequestion('value6')" id = "value6">Ques.6</a>
+        <a   rel = "6" onclick="getrespectivequestion('value7')" id = "value7">Ques.7</a>
+        <a   rel = "7" onclick="getrespectivequestion('value8')" id = "value8">Ques.8</a>
+        <a   rel = "8" onclick="getrespectivequestion('value9')" id = "value9">Ques.9</a>
+        <a   rel = "9" onclick="getrespectivequestion('value10')" id = "value10">Ques.10</a>
+    </div>
+    <span style ="font-size: 30px; cursor:pointer; "id = "navtag" onclick = "opennav()">&#9776; Question</span>
    
     <div id = "timer"><label id = "minute">02</label><label id = "connection">:</label><label id = "seconds">00</label></div>
     <div id = "container"></div><br><br>
-    <select onchange="getrespectivequestion()" id = "selector">
+   <!-- <select onchange="getrespectivequestion()" id = "selector">
         <option value ="0" id = "0">1</option>
         <option value ="1" id = "1">2</option>
         <option value ="2" id = "2">3</option>
@@ -25,7 +39,8 @@
         <option value ="7" id = "7">8</option>
         <option value ="8" id = "8">9</option>
         <option value ="9 " id = "9">10</option>
-    </select>
+    </select>-->
+    
     
     <button id = "btn3">Submit</button><br><br><br>
     <button id = "btn">Previous</button>
