@@ -13,6 +13,7 @@ var innerContainer ={ inner : null}
 var score = {0:0,1:0,2:0,3:0,5:0,6:0,4:0,7:0,8:0,9:0
     
 }
+var finalend = document.getElementById("btn4")
 var color = {
     0:document.getElementById("value1"),
     1:document.getElementById("value2"),
@@ -32,6 +33,8 @@ var connector = document.getElementById("connection")
 var yourans2 = {
     0:null,1:null,2:null,3:null,5:null,6:null,4:null,7:null,8:null,9:null
 }
+var wrongans = {value : 0}
+
 // get the name of user
 
 function givename(){
@@ -184,7 +187,7 @@ function endtest(){
         
         var toalText = document.createTextNode(total)
         var totalcorrect= document.createTextNode("No. of questions correct :"+total)
-        var correctRatio= document.createTextNode("Wrong to correct ratio :"+((10-total)/total).toFixed(2))
+        var correctRatio= document.createTextNode("Wrong to correct ratio :"+(wrongans.value/total).toFixed(2))
         var caltime= 2.00 -(Number(minutes.innerHTML)+(Number(seconds.innerHTML)/100))
         var n = caltime.toFixed(2)
         var ts = 120 - ((Number(minutes.innerHTML))*60 + Number(seconds.innerHTML))
@@ -218,6 +221,7 @@ function endtest(){
    selector.remove()
    navtag.remove()
    connector.remove()
+   finalend.remove()
 }
 // to get next question
 function getnextquestion(){
@@ -286,7 +290,7 @@ function submitAnswer(){
         //red  
         score[count.count1] = 0
         selectedInput.style.backgroundColor = "#f0908f";
-        
+        wrongans.value = wrongans.value +1
         color[count.count1].style.backgroundColor ="#f0908f";
         
     }
@@ -477,3 +481,6 @@ var submit = document.getElementById("btn3")
 previous.addEventListener("click",getpreviousquestion)
 next.addEventListener("click",getnextquestion)
 submit.addEventListener("click",submitAnswer)
+finalend.addEventListener("click",() => {
+    endtest()
+})

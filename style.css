@@ -5,7 +5,7 @@
     box-shadow: 15px 20px 15px #3e3d53;
     
     margin-top: 150px;
-    margin-left: 100px;
+    margin-left: 200px;
 }
 html{
     background-image: url("white-geometric-texture-background.jpg");
@@ -35,6 +35,7 @@ html{
     cursor: pointer;
     border: none;
     margin: 8px 0;
+    
 }
 #btn2{
     width: 25%;
@@ -46,6 +47,20 @@ html{
     cursor: pointer;
     border: none;
     margin: 8px 0;
+   
+}
+#btn4{
+    width: 25%;
+    border-radius: 6px;
+    background-color:#7f7f7f;
+    color: black;
+    padding: 14px 20px;
+    font-size: 30px;
+    cursor: pointer;
+    border: none;
+    margin: 8px 0;
+    
+
 }
 
 #timer {
@@ -68,7 +83,7 @@ html{
 }
 .sidenav{
     height : 100%;
-    width :0 ;
+    width :0px ;
     position : fixed ;
     z-index : 1;
     top:0;
