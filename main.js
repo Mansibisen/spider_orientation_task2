@@ -16,7 +16,7 @@ var previous = document.getElementById("btn")
 var next = document.getElementById("btn2")
 var submit = document.getElementById("btn3")
 var yourans2 = {0:null,1:null,2:null,3:null,5:null,6:null,4:null,7:null,8:null,9:null}
-
+var finalend = document.getElementById("btn4")
 //question and answer set
 var data = [
     {
@@ -137,6 +137,7 @@ function endtest(){
         previous.remove()
         next.remove()
         submit.remove()
+        finalend.remove()
 
 }
 function getnextquestion(){
@@ -290,7 +291,9 @@ function submitAnswer(){
 }
 
 //event listeners
-
+finalend.addEventListener("click",() => {
+    endtest()
+} )
 previous.addEventListener("click",getpreviousquestion)
 next.addEventListener("click",getnextquestion)
 submit.addEventListener("click",submitAnswer)

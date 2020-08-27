@@ -47,3 +47,15 @@ html{
     border: none;
     margin: 8px 0;
 }
+#btn4{width: 25%;
+    border-radius: 6px;
+    background-color:#7f7f7f;
+    color: black;
+    padding: 14px 20px;
+    font-size: 30px;
+    cursor: pointer;
+    border: none;
+    margin: 8px 0;
+   
+
+}
