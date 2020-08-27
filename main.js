@@ -353,7 +353,7 @@ var minutes = document.getElementById("minute");
         labelofbest.style.color = "red"
         labelofbest.style.textAlign = "center"
         
-        if (array2.length<=5){
+        
         var obtainedscore ={
              name:count.username,
              score:a
@@ -361,22 +361,17 @@ var minutes = document.getElementById("minute");
         array2.push(obtainedscore);
         array2.sort(compareScore)
          localStorage.setItem("array2", JSON.stringify(array2));
-         var z = array2[0]
-          bestscore.innerHTML =  z.name + ":" + z.score;
-         
-        }else{
-          var obtainedscore ={
-            name:count.username,
-            score:a
-        }
-       array2.push(obtainedscore);
-       array2.sort(compareScore) 
-         array2.splice(4);
-          localStorage.setItem("array2", JSON.stringify(array2));
-          var z = array2[0]
-         bestscore.innerHTML =  z.name + ":" + z.score;
-         
+        
+          var data = ""
+         for (let i = 0 ; i <array2.length ; i++){
+             let z = array2[i]
+             data = data +  z.name + ":" + z.score + ","
+            
          }
+         bestscore.innerHTML = data
+         
+        
+         
          innerContainer.inner.appendChild(labelofbest)
          innerContainer.inner.appendChild(bestscore)
       } else {
