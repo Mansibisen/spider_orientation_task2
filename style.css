@@ -1,11 +1,11 @@
 #container{
     width: 1000px;
-    height:500px;
+    height:600px;
     background-color: white;
     box-shadow: 15px 20px 15px #3e3d53;
-    
+    visibility: hidden;
     margin-top: 150px;
-    margin-left: 200px;
+    margin-left: 300px;
 }
 html{
     background-image: url("white-geometric-texture-background.jpg");
@@ -23,7 +23,9 @@ html{
     cursor: pointer;
     border: none;
     margin: 8px 0;
-    float:right;
+    
+    visibility: hidden;
+    margin-left: 300px;
 }
 #btn{
     width: 25%;
@@ -35,6 +37,8 @@ html{
     cursor: pointer;
     border: none;
     margin: 8px 0;
+    visibility: hidden;
+    margin-left: 300px;
     
 }
 #btn2{
@@ -47,7 +51,8 @@ html{
     cursor: pointer;
     border: none;
     margin: 8px 0;
-   
+   visibility: hidden;
+   margin-left: 300px;
 }
 #btn4{
     width: 25%;
@@ -59,31 +64,35 @@ html{
     cursor: pointer;
     border: none;
     margin: 8px 0;
-    
-
+    visibility: hidden;
+    margin-left: 300px;
 }
 
 #timer {
     width:100px;
     float:right;
     text-align: center;
+    visibility: hidden;
 }
 #minute{
     font-size:50px;
     color:red;
+    visibility: hidden;
 }
 #seconds{
     font-size:50px;
     color:red;
+    visibility: hidden;
 }
 
 #connection{
     font-size:50px;
     color:red;
+    
 }
 .sidenav{
     height : 100%;
-    width :0px ;
+    width :250px ;
     position : fixed ;
     z-index : 1;
     top:0;
@@ -92,6 +101,7 @@ html{
     overflow-x:hidden;
     transition :0.5s ;
     padding-top:60px;
+    visibility: hidden;
 
 
 }
@@ -101,15 +111,40 @@ html{
     font-size : 40px;
     display:block ;
     transition: 0.3s;
+    
 }
 .sidenav a:hover {
     color : #f1f1f1;
+    
 }
-.sidenav .closebtn {
-    position :absolute ;
-    top:0;
-    right : 25px ;
-    font-size : 36px;
-    margin-left : 50px;
 
+#namelabel{
+    font-size: 30px;
+    text-align: center;
+}
+#name{
+    font-size:30px;
+}
+#namebtn {
+    width: 25%;
+    border-radius: 6px;
+    background-color:#7f7f7f;
+    color: black;
+    padding: 14px 20px;
+    font-size: 30px;
+    cursor: pointer;
+    border: none;
+    margin: 8px 0;
+    
+   
+
+}
+#nameblock{
+    text-align: center;
+    background-color: white;
+            box-shadow: 15px 20px 15px #3e3d53;
+            width:700px;
+            height:200px;
+            margin-top: 300px;
+            margin-left: 400px;
 }

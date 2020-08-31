@@ -19,16 +19,16 @@ var color = {
     1:document.getElementById("value2"),
     2:document.getElementById("value3"),
     3:document.getElementById("value4"),
-    5:document.getElementById("value5"),
-    6:document.getElementById("value6"),
-    4:document.getElementById("value7"),
+    4:document.getElementById("value5"),
+    5:document.getElementById("value6"),
+    6:document.getElementById("value7"),
     7:document.getElementById("value8"),
     8:document.getElementById("value9"),
     9:document.getElementById("value10")
     
 }
 var selector = document.getElementById("selector")
-var navtag = document.getElementById("navtag")
+
 var connector = document.getElementById("connection")
 var yourans2 = {
     0:null,1:null,2:null,3:null,5:null,6:null,4:null,7:null,8:null,9:null
@@ -37,15 +37,25 @@ var wrongans = {value : 0}
 
 // get the name of user
 
-function givename(){
-    var text = prompt("Enter your name to procedd")
-    console.log(text)
-    if (text === null || text ===""){
-        givename()
-    }else{
-    count.username = text}
 
-}
+document.getElementById("namebtn").addEventListener("click", () => {
+    let username = document.getElementById("name")
+    count.username = username.value ;
+    document.getElementById("nameblock").style.display="none"
+    username.style.visibility = "hidden"
+    document.getElementById("namebtn").style.visibility = "hidden"
+    document.getElementById("namelabel").style.visibility = "hidden"
+    container.style.visibility = "visible"
+    finalend.style.visibility =  "visible"
+    previous.style.visibility =  "visible"
+    next.style.visibility =  "visible"
+    submit.style.visibility =  "visible"
+    document.getElementById("timer").style.visibility = "visible"
+    document.getElementById("minute").style.visibility = "visible"
+    document.getElementById("seconds").style.visibility = "visible"
+    document.getElementById("connection").style.visibility = "visible"
+    document.getElementById("selector").style.visibility = "visible"
+})
 
 
 
@@ -219,7 +229,8 @@ function endtest(){
     next.remove()
    submit.remove()
    selector.remove()
-   navtag.remove()
+   
+   
    connector.remove()
    finalend.remove()
 }
@@ -227,7 +238,9 @@ function endtest(){
 function getnextquestion(){
     
     if (count.count1 < 9){
+       
         count.count1++
+        
         question()
         timerForEach()
         if (count.count2[count.count1] === 1){
@@ -289,8 +302,10 @@ function submitAnswer(){
     else {
         //red  
         score[count.count1] = 0
+        
         selectedInput.style.backgroundColor = "#f0908f";
         wrongans.value = wrongans.value +1
+        
         color[count.count1].style.backgroundColor ="#f0908f";
         
     }
@@ -379,12 +394,7 @@ var minutes = document.getElementById("minute");
       } 
  }
 // for respective question
-function opennav(){
-    document.getElementById("selector").style.width = "250px";
-}
-function closenav(){
-    document.getElementById("selector").style.width = "0";
-}
+
 
 function  getrespectivequestion(a){
     var choosenquestion = document.getElementById(a).rel
@@ -393,6 +403,7 @@ function  getrespectivequestion(a){
     //color[Number(choosenquestion)] = document.getElementById(a)
     
     count.count1 = Number(choosenquestion)
+    
     question()
     timerForEach()
 
